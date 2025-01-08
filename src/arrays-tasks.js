@@ -313,8 +313,8 @@ function selectMany(arr, childrenSelector) {
  *   calculateBalance([ [ 10, 8 ], [ 1, 5 ] ])  => (10 - 8) + (1 - 5) = 2 + -4 = -2
  *   calculateBalance([]) => 0
  */
-function calculateBalance(/* arr */) {
-  throw new Error('Not implemented');
+function calculateBalance(arr) {
+  return arr.reduce((acc, curr) => acc + curr[0] - curr[1], 0);
 }
 
 /**
@@ -365,8 +365,8 @@ function generateOdds(len) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  return indices.reduce((acc, curr) => acc[curr], arr);
 }
 
 /**
@@ -381,8 +381,15 @@ function getElementByIndices(/* arr, indices */) {
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  const FALSY = [false, null, 0, '', undefined, NaN];
+  let sum = 0;
+  return arr.reduce((acc, curr) => {
+    if (FALSY.includes(curr)) {
+      sum += 1;
+    }
+    return sum;
+  }, 0);
 }
 
 /**
@@ -403,8 +410,14 @@ function getFalsyValuesCount(/* arr */) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  let index = 0;
+  return new Array(n).fill(0).reduce((acc, curr, idx) => {
+    acc.push(new Array(n).fill(0));
+    acc[idx][index] = 1;
+    index += 1;
+    return acc;
+  }, []);
 }
 
 /**
